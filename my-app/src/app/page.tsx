@@ -1,16 +1,15 @@
 "use client"
+import Image from 'next/image';
+import { signIn, signOut, useSession } from 'next-auth/react';
 
-import { signOut, useSession } from 'next-auth/react'
 
-export default function Home() {
+export default async function Home() {
   const session = useSession();
+
   return (
     <>
       <div>{session?.data?.user?.name}</div>
-      <button 
-      className="transition duration-300 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-1"
-      type="button"
-      onClick={() => signOut()}>Sign out</button>
+      <button className="h-10 px-6 font-semibold rounded-md border border-slate-200 text-slate-900" type="button" onClick={() => signOut()}>Sign Out</button>
     </>
   )
 }

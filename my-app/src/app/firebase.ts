@@ -1,7 +1,5 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs} from "firebase/firestore";
-import { getAuth, createUserWithEmailAndPassword, UserCredential } from "firebase/auth";
+import { getApp, getApps, initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -15,17 +13,6 @@ const firebaseConfig = {
   appId: "1:712940938814:web:8c2cc2d57e12e64815936f"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-export const auth = getAuth(app);
-
-export async function getUsers() {
-    const querySnapshot = await getDocs(collection(db, "users"));
-    const users = querySnapshot.docs.map(doc => ({...doc.data(), id: doc.id})); 
-    console.log(users);
-    return users;
-}
-
-// Sign up with email and password
-
+// look for an instance of firebase, if not found init a new one
+const app = getApps.length > 0 ? getApp() : initializeApp(firebaseConfig);
+export { app};
